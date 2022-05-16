@@ -3,8 +3,11 @@ import { TaskRequirements } from "./requirements";
 import { TaskLength } from "@/contracts/task";
 
 export const enum BossId {
+    ChaosFanatic = "fanatic",
     GiantMole = "mole",
-    Kril = "kril"
+    Kril = "kril",
+    Tempoross = "tempoross",
+    Wintertodt = "wintertodt"
 }
 
 interface KillCountRanges {
@@ -13,7 +16,7 @@ interface KillCountRanges {
     [TaskLength.Long]: [number, number];
 }
 
-interface BossDetails<Id extends BossId> {
+export interface BossDetails<Id extends BossId> {
     friendlyName: string;
     id: Id;
     isWilderness: boolean;
@@ -30,6 +33,19 @@ export const StandardKillCountRanges: KillCountRanges = {
 };
 
 export const AllBosses: BossRecord = {
+    [BossId.ChaosFanatic]: {
+        friendlyName: "Chaos Fanatic",
+        id: BossId.ChaosFanatic,
+        isWilderness: true,
+        killCountRanges: StandardKillCountRanges,
+        requirements: {
+            skillLevels: {
+                defence: 70,
+                prayer: 37,
+                ranged: 75
+            }
+        }
+    },
     [BossId.GiantMole]: {
         friendlyName: "Giant Mole",
         id: BossId.GiantMole,
@@ -53,6 +69,28 @@ export const AllBosses: BossRecord = {
             skillLevels: {
                 hitpoints: 70,
                 prayer: 43
+            }
+        }
+    },
+    [BossId.Tempoross]: {
+        friendlyName: "Tempoross",
+        id: BossId.Tempoross,
+        isWilderness: false,
+        killCountRanges: StandardKillCountRanges,
+        requirements: {
+            skillLevels: {
+                fishing: 35
+            }
+        }
+    },
+    [BossId.Wintertodt]: {
+        friendlyName: "Wintertodt",
+        id: BossId.Wintertodt,
+        isWilderness: false,
+        killCountRanges: StandardKillCountRanges,
+        requirements: {
+            skillLevels: {
+                firemaking: 50
             }
         }
     }

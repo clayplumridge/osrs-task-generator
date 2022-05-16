@@ -1,3 +1,4 @@
+import { generateTaskLength } from "./util";
 import { validateTaskType } from "./validate_constraints";
 import { Constraints, TaskType } from "@/contracts/task";
 import { RequestContext } from "@/generate/context";
@@ -14,7 +15,22 @@ export const bossKillCountGenerator: TaskGenerator<TaskType.BossKillCount> = {
             )
         );
     },
-    generate: () => {
-        return { type: TaskType.BossKillCount };
+    generate: (context: RequestContext) => {
+        const validBosses = Object.values(AllBosses).filter(x =>
+            areRequirementsFulfilled(context, x.requirements)
+        );
+
+        const selectedBoss =
+            validBosses[context.services.rng(validBosses.length) - 1];
+        const taskLength = generateTaskLength(context);
+        const [taskMinKills, taskMaxKills] =
+            selectedBoss.killCountRanges[taskLength];
+        const taskKillCount = context.services.rng(taskMinKills, taskMaxKills);
+
+        return {
+            boss: selectedBoss,
+            kills: taskKillCount,
+            type: TaskType.BossKillCount
+        };
     }
 };

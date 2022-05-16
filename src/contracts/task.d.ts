@@ -1,3 +1,5 @@
+import { BossDetails } from "@/generate/data/bosses";
+
 export type Task =
     | AcquireAccountBoundTask
     | BossKillCountTask
@@ -34,7 +36,10 @@ interface BaseTask<T extends TaskType> {
     type: T;
 }
 
-export interface BossKillCountTask extends BaseTask<TaskType.BossKillCount> {}
+export interface BossKillCountTask extends BaseTask<TaskType.BossKillCount> {
+    boss: BossDetails<any>;
+    kills: number;
+}
 
 export interface BossUntilUniqueTask
     extends BaseTask<TaskType.BossUntilUnique> {}

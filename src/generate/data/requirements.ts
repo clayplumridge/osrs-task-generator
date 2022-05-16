@@ -43,15 +43,15 @@ function validateBaseRequirements(
         skillLevels: requiredSkillLevels
     } = requirements;
 
-    // Quest requirements
+    const user = context.user;
+
     if (
         requiredQuests &&
-        requiredQuests.every(x => context.user.completedQuests.has(x))
+        requiredQuests.some(x => !user.completedQuests.has(x))
     ) {
         return false;
     }
 
-    // Quest point requirements
     if (
         requiredQuestPoints &&
         requiredQuestPoints <= calculateAccumulatedQuestPoints(context)
@@ -65,8 +65,7 @@ function validateBaseRequirements(
 
         if (
             requiredSkills.some(
-                x =>
-                    requiredSkillLevels[x]! > context.user.stats.skills[x].level
+                x => requiredSkillLevels[x]! > user.stats.skills[x].level
             )
         ) {
             return false;

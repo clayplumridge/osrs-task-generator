@@ -1,0 +1,4 @@
+*.html
+webpack.*.js
+jest.*.js
+*.png

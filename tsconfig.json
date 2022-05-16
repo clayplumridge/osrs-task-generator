@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "incremental": true,
+        "declaration": true,
+        "target": "es2018",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "sourceMap": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "rootDir": ".",
+        "jsx": "react",
+        "baseUrl": ".",
+        "lib": ["ES2020"],
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    },
+
+    "include": ["**/*.ts", "**/*.tsx"]
+}

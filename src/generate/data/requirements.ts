@@ -1,5 +1,5 @@
 import { SkillName } from "osrs-json-hiscores";
-import { AllQuests, QuestId } from "./quests";
+import { QuestId } from "./quests";
 import { RequestContext } from "@/generate/context";
 
 export interface TaskRequirements extends BaseTaskRequirements {
@@ -77,7 +77,7 @@ function validateBaseRequirements(
 
 function calculateAccumulatedQuestPoints(context: RequestContext): number {
     return Array.from(context.user.completedQuests).reduce(
-        (rollup, curr) => rollup + AllQuests[curr].questPoints,
+        (rollup, curr) => rollup + context.data.quests[curr].questPoints,
         0
     );
 }

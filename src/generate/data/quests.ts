@@ -21,7 +21,7 @@ interface QuestDetails<Id extends QuestId> {
     requirements?: TaskRequirements;
 }
 
-type QuestRecord = { [key in QuestId]: QuestDetails<key> };
+export type QuestRecord = { [key in QuestId]: QuestDetails<key> };
 
 export const AllQuests: QuestRecord = {
     [QuestId.CooksAssistant]: {

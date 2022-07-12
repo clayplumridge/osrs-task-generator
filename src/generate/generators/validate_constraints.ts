@@ -9,3 +9,24 @@ export function validateTaskType(
         constraints.allowedTypes.some(x => x === myTaskType)
     );
 }
+
+interface HasIsWilderness {
+    isWilderness: boolean;
+}
+
+export function validateWilderness(
+    constraints: Constraints,
+    taskDetails: HasIsWilderness
+): boolean {
+    if (taskDetails.isWilderness) {
+        return (
+            constraints.wilderness === "allow" ||
+            constraints.wilderness === "require"
+        );
+    } else {
+        return (
+            constraints.wilderness === "allow" ||
+            constraints.wilderness === "disallow"
+        );
+    }
+}

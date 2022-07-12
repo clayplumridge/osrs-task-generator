@@ -1,6 +1,8 @@
 import { random } from "lodash";
 import { Gamemode, getStats, Stats } from "osrs-json-hiscores";
-import { QuestId } from "./data/quests";
+import { AllBosses, BossRecord } from "./data/bosses";
+import { AllQuests, QuestId, QuestRecord } from "./data/quests";
+import { SkillRecord, TrainableSkills } from "./data/skills";
 import { bossKillCountGenerator } from "./generators/boss_kc_generator";
 import { TaskGenerator } from "./index.types";
 import { TaskType } from "@/contracts/task";
@@ -14,6 +16,11 @@ const allGenerators: GeneratorMap = {
 };
 
 export interface RequestContext {
+    data: {
+        bosses: BossRecord;
+        quests: QuestRecord;
+        skills: SkillRecord;
+    };
     services: {
         generators: GeneratorMap;
         rng: typeof random;
@@ -36,6 +43,11 @@ export async function createRequestContext(
     }
 
     return {
+        data: {
+            bosses: AllBosses,
+            quests: AllQuests,
+            skills: TrainableSkills
+        },
         services: { generators: allGenerators, rng: random },
         user: { completedQuests: new Set(), gameMode: player.mode, stats }
     };

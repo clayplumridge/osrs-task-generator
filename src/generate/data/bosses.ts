@@ -24,7 +24,7 @@ export interface BossDetails<Id extends BossId> {
     requirements?: TaskRequirements;
 }
 
-type BossRecord = { [key in BossId]: BossDetails<key> };
+export type BossRecord = { [key in BossId]: BossDetails<key> };
 
 export const StandardKillCountRanges: KillCountRanges = {
     [TaskLength.Short]: [5, 15],

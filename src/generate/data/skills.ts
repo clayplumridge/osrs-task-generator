@@ -8,7 +8,7 @@ interface SkillDetails<Id extends SkillName> {
     requirements?: TaskRequirements;
 }
 
-type SkillRecord = { [key in SkillName]?: SkillDetails<key> };
+export type SkillRecord = { [key in SkillName]?: SkillDetails<key> };
 
 export const TrainableSkills: SkillRecord = {
     agility: {

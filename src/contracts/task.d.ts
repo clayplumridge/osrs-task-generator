@@ -56,4 +56,5 @@ export interface AcquireAccountBoundTask
 export interface Constraints {
     allowedTypes?: TaskType[];
     requiredMaxLength?: TaskLength;
+    wilderness?: "allow" | "require" | "disallow";
 }

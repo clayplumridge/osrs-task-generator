@@ -6,11 +6,20 @@ import { useTestState } from "@/testutil/state";
 
 describe("bossKillCountGenerator", () => {
     const state = useTestState(() => {
+        const rngMock = jest.fn(min => Math.max(min || 0, 1));
+
         const context = createTestRequestContext(ctx => {
             ctx.data.bosses[BossId.Wintertodt] = {
                 ...AllBosses[BossId.Wintertodt],
                 requirements: {}
             };
+
+            ctx.data.bosses[BossId.Tempoross] = {
+                ...AllBosses[BossId.Tempoross],
+                requirements: {}
+            };
+
+            ctx.services.rng = rngMock;
 
             return ctx;
         });
@@ -32,6 +41,14 @@ describe("bossKillCountGenerator", () => {
             });
 
             expect(result).toEqual(true);
+        });
+    });
+
+    describe("generate", () => {
+        it("produces valid tasks", () => {
+            expect(
+                bossKillCountGenerator.generate(state.context)
+            ).toBeDefined();
         });
     });
 });

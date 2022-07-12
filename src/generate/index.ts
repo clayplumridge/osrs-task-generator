@@ -4,7 +4,7 @@ import { Constraints, Task, TaskType } from "@/contracts/task";
 
 export function generate(
     requestContext: RequestContext,
-    constraints: Constraints
+    constraints?: Constraints
 ): Task {
     const legalGenerators = getLegalGenerators(requestContext, constraints);
     const generator =
@@ -16,7 +16,7 @@ export function generate(
 
 export function getLegalGenerators(
     requestContext: RequestContext,
-    constraints: Constraints
+    constraints?: Constraints
 ): TaskGenerator<TaskType>[] {
     const allGenerators = requestContext.services.generators;
 

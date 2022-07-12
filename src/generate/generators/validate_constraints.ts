@@ -18,6 +18,10 @@ export function validateWilderness(
     constraints: Constraints,
     taskDetails: HasIsWilderness
 ): boolean {
+    if (constraints.wilderness === undefined) {
+        return true;
+    }
+
     if (taskDetails.isWilderness) {
         return (
             constraints.wilderness === "allow" ||

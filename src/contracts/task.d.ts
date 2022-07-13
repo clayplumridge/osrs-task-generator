@@ -1,4 +1,5 @@
 import { BossDetails } from "@/generate/data/bosses";
+import { QuestDetails } from "@/generate/data/quests";
 
 export type Task =
     | AcquireAccountBoundTask
@@ -46,7 +47,9 @@ export interface BossUntilUniqueTask
 
 export interface TrainSkillTask extends BaseTask<TaskType.TrainSkill> {}
 
-export interface CompleteQuestTask extends BaseTask<TaskType.CompleteQuest> {}
+export interface CompleteQuestTask extends BaseTask<TaskType.CompleteQuest> {
+    quest: QuestDetails<any>;
+}
 
 export interface CompleteDiaryTask extends BaseTask<TaskType.CompleteDiary> {}
 

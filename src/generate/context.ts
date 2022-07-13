@@ -4,13 +4,15 @@ import { AllBosses, BossRecord } from "./data/bosses";
 import { AllQuests, QuestId, QuestRecord } from "./data/quests";
 import { SkillRecord, TrainableSkills } from "./data/skills";
 import { bossKillCountGenerator } from "./generators/boss_kc_generator";
+import { completeQuestGenerator } from "./generators/complete_quest_generator";
 import { TaskGenerator } from "./index.types";
 import { TaskType } from "@/contracts/task";
 
 type GeneratorMap = Partial<{ [key in TaskType]: TaskGenerator<key> }>;
 
 const allGenerators: GeneratorMap = {
-    [TaskType.BossKillCount]: bossKillCountGenerator
+    [TaskType.BossKillCount]: bossKillCountGenerator,
+    [TaskType.CompleteQuest]: completeQuestGenerator
     // [TaskType.BossUntilUnique]: bossUntilUniqueGenerator,
     // [TaskType.TrainSkill]: trainSkillGenerator
 };

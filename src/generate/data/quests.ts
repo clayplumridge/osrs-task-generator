@@ -12,7 +12,7 @@ export const enum QuestId {
     TrollStronghold = "trollstronghold"
 }
 
-interface QuestDetails<Id extends QuestId> {
+export interface QuestDetails<Id extends QuestId> {
     friendlyName: string;
     id: Id;
     isWilderness: boolean;

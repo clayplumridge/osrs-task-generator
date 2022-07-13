@@ -1,10 +1,11 @@
 import { Constraints, TaskType } from "@/contracts/task";
 
 export function validateTaskType(
-    constraints: Constraints,
-    myTaskType: TaskType
+    myTaskType: TaskType,
+    constraints?: Constraints
 ): boolean {
     return (
+        constraints === undefined ||
         constraints.allowedTypes === undefined ||
         constraints.allowedTypes.some(x => x === myTaskType)
     );
@@ -15,10 +16,10 @@ interface HasIsWilderness {
 }
 
 export function validateWilderness(
-    constraints: Constraints,
-    taskDetails: HasIsWilderness
+    taskDetails: HasIsWilderness,
+    constraints?: Constraints
 ): boolean {
-    if (constraints.wilderness === undefined) {
+    if (constraints?.wilderness === undefined) {
         return true;
     }
 

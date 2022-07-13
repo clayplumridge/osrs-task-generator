@@ -1,6 +1,7 @@
 import { SkillName } from "osrs-json-hiscores";
 import { QuestId } from "./quests";
 import { RequestContext } from "@/generate/context";
+import { calculateCombatLevel } from "@/util/osrs";
 
 export interface TaskRequirements extends BaseTaskRequirements {
     ironOnly?: BaseTaskRequirements;
@@ -40,7 +41,8 @@ function validateBaseRequirements(
     const {
         quests: requiredQuests,
         questPoints: requiredQuestPoints,
-        skillLevels: requiredSkillLevels
+        skillLevels: requiredSkillLevels,
+        minCombatLevel: requiredCombatLevel
     } = requirements;
 
     const user = context.user;
@@ -71,6 +73,14 @@ function validateBaseRequirements(
             return false;
         }
     }
+
+    if (
+        requiredCombatLevel &&
+        requiredCombatLevel > calculateCombatLevel(context.user.stats.skills)
+    ) {
+        return false;
+    }
+    // TODO: validate combat level
 
     return true;
 }

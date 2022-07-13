@@ -80,7 +80,6 @@ function validateBaseRequirements(
     ) {
         return false;
     }
-    // TODO: validate combat level
 
     return true;
 }

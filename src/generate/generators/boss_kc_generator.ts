@@ -22,7 +22,7 @@ export const bossKillCountGenerator: TaskGenerator<TaskType.BossKillCount> = {
         );
 
         const selectedBoss = validBosses[random(1, validBosses.length) - 1];
-        const taskLength = generateTaskLength(context);
+        const taskLength = generateTaskLength();
         const [taskMinKills, taskMaxKills] =
             selectedBoss.killCountRanges[taskLength];
         const taskKillCount = random(taskMinKills, taskMaxKills);

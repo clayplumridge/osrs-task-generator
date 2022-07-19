@@ -14,8 +14,7 @@ export function createTestRequestContext(
             skills: {} as SkillRecord
         },
         services: {
-            generators: {},
-            rng: () => 0
+            generators: {}
         },
         user: {
             completedQuests: new Set<QuestId>(),

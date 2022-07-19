@@ -1,3 +1,4 @@
+import { random } from "lodash";
 import { validateTaskType, validateWilderness } from "./validate_constraints";
 import { TaskType } from "@/contracts/task";
 import { areRequirementsFulfilled } from "@/generate/data/requirements";
@@ -19,8 +20,7 @@ export const completeQuestGenerator: TaskGenerator<TaskType.CompleteQuest> = {
             areRequirementsFulfilled(context, x.requirements)
         );
 
-        const selectedQuest =
-            validQuests[context.services.rng(validQuests.length) - 1];
+        const selectedQuest = validQuests[random(validQuests.length) - 1];
 
         return { quest: selectedQuest, type: TaskType.CompleteQuest };
     }

@@ -1,3 +1,4 @@
+import { random } from "lodash";
 import { RequestContext } from "./context";
 import { TaskGenerator } from "./index.types";
 import { Constraints, TaskType } from "@/contracts/task";
@@ -6,10 +7,7 @@ import { withTimings } from "@/util/timing";
 export const generate = withTimings(
     (requestContext: RequestContext, constraints?: Constraints) => {
         const legalGenerators = getLegalGenerators(requestContext, constraints);
-        const generator =
-            legalGenerators[
-                requestContext.services.rng(legalGenerators.length - 1)
-            ];
+        const generator = legalGenerators[random(legalGenerators.length - 1)];
         return generator.generate(requestContext, constraints);
     },
     "generate"

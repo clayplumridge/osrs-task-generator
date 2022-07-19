@@ -1,3 +1,4 @@
+import { random } from "lodash";
 import { generateTaskLength } from "./util";
 import { validateTaskType, validateWilderness } from "./validate_constraints";
 import { TaskType } from "@/contracts/task";
@@ -20,12 +21,11 @@ export const bossKillCountGenerator: TaskGenerator<TaskType.BossKillCount> = {
             areRequirementsFulfilled(context, x.requirements)
         );
 
-        const selectedBoss =
-            validBosses[context.services.rng(1, validBosses.length) - 1];
+        const selectedBoss = validBosses[random(1, validBosses.length) - 1];
         const taskLength = generateTaskLength(context);
         const [taskMinKills, taskMaxKills] =
             selectedBoss.killCountRanges[taskLength];
-        const taskKillCount = context.services.rng(taskMinKills, taskMaxKills);
+        const taskKillCount = random(taskMinKills, taskMaxKills);
 
         return {
             boss: selectedBoss,

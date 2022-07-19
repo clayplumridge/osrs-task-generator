@@ -2,11 +2,12 @@ import { bossKillCountGenerator } from "./boss_kc_generator";
 import { TaskType } from "@/contracts/task";
 import { AllBosses, BossId } from "@/generate/data/bosses";
 import { createTestRequestContext } from "@/testutil/context";
+import { mockRandom } from "@/testutil/rng";
 import { useTestState } from "@/testutil/state";
 
 describe("bossKillCountGenerator", () => {
     const state = useTestState(() => {
-        const rngMock = jest.fn(min => Math.max(min || 0, 1));
+        mockRandom(min => Math.max(typeof min == "number" ? min : 0, 1));
 
         const context = createTestRequestContext(ctx => {
             ctx.data.bosses[BossId.Wintertodt] = {
@@ -18,8 +19,6 @@ describe("bossKillCountGenerator", () => {
                 ...AllBosses[BossId.Tempoross],
                 requirements: {}
             };
-
-            ctx.services.rng = rngMock;
 
             return ctx;
         });

@@ -1,4 +1,3 @@
-import { random } from "lodash";
 import { Gamemode, getStats, Stats } from "osrs-json-hiscores";
 import { AllBosses, BossRecord } from "./data/bosses";
 import { AllQuests, QuestId, QuestRecord } from "./data/quests";
@@ -25,7 +24,6 @@ export interface RequestContext {
     };
     services: {
         generators: GeneratorMap;
-        rng: typeof random;
     };
     user: {
         completedQuests: Set<QuestId>;
@@ -50,7 +48,7 @@ export async function createRequestContext(
             quests: AllQuests,
             skills: TrainableSkills
         },
-        services: { generators: allGenerators, rng: random },
+        services: { generators: allGenerators },
         user: { completedQuests: new Set(), gameMode: player.mode, stats }
     };
 }

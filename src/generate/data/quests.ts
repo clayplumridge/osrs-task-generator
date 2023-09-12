@@ -12,16 +12,23 @@ export const enum QuestId {
     TrollStronghold = "trollstronghold"
 }
 
-export interface QuestDetails<Id extends QuestId> {
+export interface QuestDetails {
     friendlyName: string;
-    id: Id;
+    id: QuestId;
     isWilderness: boolean;
     length: TaskLength;
     questPoints: number;
     requirements?: TaskRequirements;
 }
 
-export type QuestRecord = { [key in QuestId]: QuestDetails<key> };
+interface IdConstraint<Id extends QuestId> {
+    id: Id;
+}
+
+export type QuestRecord = { [key in QuestId]: QuestDetails };
+type ConstrainedQuestRecord = QuestRecord & {
+    [key in QuestId]: IdConstraint<key>;
+};
 
 export const AllQuests: QuestRecord = {
     [QuestId.CooksAssistant]: {
@@ -110,4 +117,4 @@ export const AllQuests: QuestRecord = {
             }
         }
     }
-};
+} satisfies ConstrainedQuestRecord;

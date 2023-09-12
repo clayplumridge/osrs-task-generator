@@ -16,15 +16,22 @@ interface KillCountRanges {
     [TaskLength.Long]: [number, number];
 }
 
-export interface BossDetails<Id extends BossId> {
+export interface BossDetails {
     friendlyName: string;
-    id: Id;
+    id: BossId;
     isWilderness: boolean;
     killCountRanges: KillCountRanges;
     requirements?: TaskRequirements;
 }
 
-export type BossRecord = { [key in BossId]: BossDetails<key> };
+interface IdConstraint<Id extends BossId> {
+    id: Id;
+}
+
+export type BossRecord = { [key in BossId]: BossDetails };
+type ConstrainedBossRecord = BossRecord & {
+    [key in BossId]: IdConstraint<key>;
+};
 
 export const StandardKillCountRanges: KillCountRanges = {
     [TaskLength.Short]: [5, 15],
@@ -94,4 +101,4 @@ export const AllBosses: BossRecord = {
             }
         }
     }
-};
+} satisfies ConstrainedBossRecord;

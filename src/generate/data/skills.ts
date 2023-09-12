@@ -2,13 +2,20 @@ import { SkillName } from "osrs-json-hiscores";
 import { QuestId } from "./quests";
 import { TaskRequirements } from "./requirements";
 
-interface SkillDetails<Id extends SkillName> {
+interface SkillDetails {
     friendlyName: string;
-    id: Id;
+    id: SkillName;
     requirements?: TaskRequirements;
 }
 
-export type SkillRecord = { [key in SkillName]?: SkillDetails<key> };
+interface IdConstraint<Id extends SkillName> {
+    id: Id;
+}
+
+export type SkillRecord = { [key in SkillName]?: SkillDetails };
+type ConstrainedSkillRecord = SkillRecord & {
+    [key in SkillName]?: IdConstraint<key>;
+};
 
 export const TrainableSkills: SkillRecord = {
     agility: {
@@ -101,4 +108,4 @@ export const TrainableSkills: SkillRecord = {
         friendlyName: "Woodcutting",
         id: "woodcutting"
     }
-};
+} satisfies ConstrainedSkillRecord;

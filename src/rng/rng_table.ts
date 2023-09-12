@@ -24,13 +24,21 @@ export interface RngTableBuilderOptions {
     name?: string;
 }
 
-export class RngTableBuilder<T = never> {
-    private readonly items: Array<Item<T>> = [];
+export class RngTableBuilder<T> {
+    private constructor(private readonly items: Array<Item<T>> = []) {}
 
-    public addSubtable<SubtableType>(
+    static create<T = never>() {
+        return new RngTableBuilder<T>();
+    }
+
+    public withSubtable<SubtableType>(
         weight: number,
         subtable: RngTable<SubtableType>
     ): RngTableBuilder<T | SubtableType> {
+        if (subtable.length() === 0) {
+            return this;
+        }
+
         const typecastItems = this.items as Array<Item<T | SubtableType>>;
 
         typecastItems.push({
@@ -39,10 +47,10 @@ export class RngTableBuilder<T = never> {
             weight
         });
 
-        return this;
+        return new RngTableBuilder(typecastItems);
     }
 
-    public addItem<ItemType>(
+    public withItem<ItemType>(
         weight: number,
         item: ItemType
     ): RngTableBuilder<T | ItemType> {
@@ -54,7 +62,7 @@ export class RngTableBuilder<T = never> {
             weight
         });
 
-        return this;
+        return new RngTableBuilder(typecastItems);
     }
 
     public build(options?: RngTableBuilderOptions) {
@@ -62,7 +70,7 @@ export class RngTableBuilder<T = never> {
     }
 }
 
-class RngTable<T> {
+export class RngTable<T> {
     private readonly table: Array<Item<T>>;
     private readonly totalWeight: number;
 
@@ -82,8 +90,12 @@ class RngTable<T> {
         });
     }
 
+    public length(): number {
+        return this.table.length;
+    }
+
     public roll(): T {
-        const pos = random(0, this.totalWeight);
+        const pos = random(0, this.totalWeight - 1);
         const selected = this.table[pos];
 
         switch (selected._type) {
@@ -162,7 +174,7 @@ class RngTable<T> {
             this.totalWeight
         );
 
-        return `Subtable (${name}) - Weight: ${item.weight} (${printableOdds})`;
+        return `Subtable (${name}) - Weight: ${item.weight} (${printableOdds}%)`;
     }
 }
 

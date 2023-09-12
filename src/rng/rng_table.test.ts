@@ -7,10 +7,10 @@ describe("rng_table", () => {
         const state = useTestState(() => {
             useRandomResults([5, 15, 25]);
 
-            const table = new RngTableBuilder()
-                .addItem(10, "first")
-                .addItem(10, "second")
-                .addItem(10, "third")
+            const table = RngTableBuilder.create()
+                .withItem(10, "first")
+                .withItem(10, "second")
+                .withItem(10, "third")
                 .build();
 
             return { table };
@@ -25,12 +25,12 @@ describe("rng_table", () => {
 
     describe("recursive tables", () => {
         const state = useTestState(() => {
-            const table = new RngTableBuilder()
-                .addItem(10, "first")
-                .addSubtable(
+            const table = RngTableBuilder.create()
+                .withItem(10, "first")
+                .withSubtable(
                     10,
-                    new RngTableBuilder()
-                        .addItem(10, { subtable: true })
+                    RngTableBuilder.create()
+                        .withItem(10, { subtable: true })
                         .build()
                 )
                 .build();

@@ -1,25 +1,19 @@
-import { random } from "lodash";
 import { RequestContext } from "./context";
-import { TaskGenerator } from "./index.types";
-import { Constraints, TaskType } from "@/contracts/task";
+import { makeBossKillCountTable, makeQuestTable } from "./tables";
+import { Constraints } from "@/contracts/task";
+import { RngTableBuilder } from "@/rng/rng_table";
 import { withTimings } from "@/util/timing";
 
 export const generate = withTimings(
     (requestContext: RequestContext, constraints?: Constraints) => {
-        const legalGenerators = getLegalGenerators(requestContext, constraints);
-        const generator = legalGenerators[random(legalGenerators.length - 1)];
-        return generator.generate(requestContext, constraints);
+        return makeTable(requestContext, constraints).roll();
     },
     "generate"
 );
 
-export function getLegalGenerators(
-    requestContext: RequestContext,
-    constraints?: Constraints
-): TaskGenerator<TaskType>[] {
-    const allGenerators = requestContext.services.generators;
-
-    return Object.values(allGenerators).filter(x =>
-        x.canGenerate(requestContext, constraints)
-    );
+export function makeTable(context: RequestContext, constraints?: Constraints) {
+    return RngTableBuilder.create()
+        .withSubtable(1, makeQuestTable(context, constraints))
+        .withSubtable(1, makeBossKillCountTable(context, constraints))
+        .build({ name: "Full Table" });
 }

@@ -1,4 +1,4 @@
-export function useTestState<T>(producer: () => T): T {
+export function useTestState<T extends {}>(producer: () => T): T {
     const stateObject = producer();
 
     beforeEach(() => {

@@ -13,9 +13,6 @@ export function createTestRequestContext(
             quests: {} as QuestRecord,
             skills: {} as SkillRecord
         },
-        services: {
-            generators: {}
-        },
         user: {
             completedQuests: new Set<QuestId>(),
             gameMode: "main",

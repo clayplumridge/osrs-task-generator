@@ -1,6 +1,6 @@
 import { generate } from "./generate";
 import { createRequestContext } from "./generate/context";
-import { getLogger } from "./util/log";
+import { getLogger } from "./generate/util/log";
 
 const mainLogger = getLogger("main");
 

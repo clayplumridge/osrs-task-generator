@@ -1,10 +1,12 @@
-import { isTaskTypeAllowed } from "./util";
 import { CompleteQuestTask, Constraints, TaskType } from "@/contracts/task";
 import { RequestContext } from "@/generate/context";
-import { satisfiesWildernessConstraint } from "@/generate/data/constraints";
 import { QuestId } from "@/generate/data/quests";
-import { areRequirementsFulfilled } from "@/generate/data/requirements";
 import { RngTableBuilder } from "@/generate/rng/rng_table";
+import {
+    isTaskTypeAllowed,
+    satisfiesWildernessConstraint
+} from "@/generate/util/constraints";
+import { areRequirementsFulfilled } from "@/generate/util/requirements";
 
 type QuestWeightRecord = { [key in QuestId]: number };
 

@@ -2,7 +2,7 @@ import { Gamemode, getStats, Stats } from "osrs-json-hiscores";
 import { AllBosses, BossRecord } from "./data/bosses";
 import { AllQuests, QuestId, QuestRecord } from "./data/quests";
 import { SkillRecord, TrainableSkills } from "./data/skills";
-import { withTimings } from "@/util/timing";
+import { withTimings } from "@/generate/util/timing";
 
 export interface RequestContext {
     data: {

@@ -1,10 +1,12 @@
-import { isTaskTypeAllowed } from "./util";
 import { BossUntilUniqueTask, Constraints, TaskType } from "@/contracts/task";
 import { RequestContext } from "@/generate/context";
 import { BossId } from "@/generate/data/bosses";
-import { satisfiesWildernessConstraint } from "@/generate/data/constraints";
-import { areRequirementsFulfilled } from "@/generate/data/requirements";
 import { RngTableBuilder } from "@/generate/rng/rng_table";
+import {
+    isTaskTypeAllowed,
+    satisfiesWildernessConstraint
+} from "@/generate/util/constraints";
+import { areRequirementsFulfilled } from "@/generate/util/requirements";
 
 type BossWeightRecord = { [key in BossId]: number };
 

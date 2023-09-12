@@ -1,5 +1,5 @@
-import { TaskRequirements } from "./requirements";
 import { TaskLength } from "@/contracts/task";
+import { TaskRequirements } from "@/generate/util/requirements";
 
 export const enum QuestId {
     CooksAssistant = "cooksassistant",

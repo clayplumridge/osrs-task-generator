@@ -1,7 +1,7 @@
 import { FORMATTED_BOSS_NAMES } from "osrs-json-hiscores";
 import { QuestId } from "./quests";
-import { TaskRequirements } from "./requirements";
 import { TaskLength } from "@/contracts/task";
+import { TaskRequirements } from "@/generate/util/requirements";
 
 export const enum BossId {
     ChaosFanatic = "chaosFanatic",

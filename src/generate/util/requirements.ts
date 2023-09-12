@@ -1,7 +1,7 @@
 import { SkillName } from "osrs-json-hiscores";
-import { QuestId } from "./quests";
 import { RequestContext } from "@/generate/context";
-import { calculateCombatLevel } from "@/util/osrs";
+import { QuestId } from "@/generate/data/quests";
+import { calculateCombatLevel } from "@/generate/util/osrs";
 
 export interface TaskRequirements extends BaseTaskRequirements {
     ironOnly?: BaseTaskRequirements;

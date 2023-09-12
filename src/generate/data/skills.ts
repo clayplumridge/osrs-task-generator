@@ -1,6 +1,6 @@
 import { SkillName } from "osrs-json-hiscores";
 import { QuestId } from "./quests";
-import { TaskRequirements } from "./requirements";
+import { TaskRequirements } from "@/generate/util/requirements";
 
 interface SkillDetails {
     friendlyName: string;

@@ -1,11 +1,12 @@
+import { FORMATTED_BOSS_NAMES } from "osrs-json-hiscores";
 import { QuestId } from "./quests";
 import { TaskRequirements } from "./requirements";
 import { TaskLength } from "@/contracts/task";
 
 export const enum BossId {
-    ChaosFanatic = "fanatic",
-    GiantMole = "mole",
-    Kril = "kril",
+    ChaosFanatic = "chaosFanatic",
+    GiantMole = "giantMole",
+    Kril = "krilTsutsaroth",
     Tempoross = "tempoross",
     Wintertodt = "wintertodt"
 }
@@ -41,7 +42,7 @@ export const StandardKillCountRanges: KillCountRanges = {
 
 export const AllBosses: BossRecord = {
     [BossId.ChaosFanatic]: {
-        friendlyName: "Chaos Fanatic",
+        friendlyName: FORMATTED_BOSS_NAMES[BossId.ChaosFanatic],
         id: BossId.ChaosFanatic,
         isWilderness: true,
         killCountRanges: StandardKillCountRanges,
@@ -54,7 +55,7 @@ export const AllBosses: BossRecord = {
         }
     },
     [BossId.GiantMole]: {
-        friendlyName: "Giant Mole",
+        friendlyName: FORMATTED_BOSS_NAMES[BossId.GiantMole],
         id: BossId.GiantMole,
         isWilderness: false,
         killCountRanges: StandardKillCountRanges,
@@ -66,7 +67,7 @@ export const AllBosses: BossRecord = {
         }
     },
     [BossId.Kril]: {
-        friendlyName: "K'ril Tsutsaroth",
+        friendlyName: FORMATTED_BOSS_NAMES[BossId.Kril],
         id: BossId.Kril,
         isWilderness: false,
         killCountRanges: StandardKillCountRanges,
@@ -80,7 +81,7 @@ export const AllBosses: BossRecord = {
         }
     },
     [BossId.Tempoross]: {
-        friendlyName: "Tempoross",
+        friendlyName: FORMATTED_BOSS_NAMES[BossId.Tempoross],
         id: BossId.Tempoross,
         isWilderness: false,
         killCountRanges: StandardKillCountRanges,
@@ -91,7 +92,7 @@ export const AllBosses: BossRecord = {
         }
     },
     [BossId.Wintertodt]: {
-        friendlyName: "Wintertodt",
+        friendlyName: FORMATTED_BOSS_NAMES[BossId.Wintertodt],
         id: BossId.Wintertodt,
         isWilderness: false,
         killCountRanges: StandardKillCountRanges,

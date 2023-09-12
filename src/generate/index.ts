@@ -5,7 +5,7 @@ import {
     makeQuestTable
 } from "./tables";
 import { Constraints } from "@/contracts/task";
-import { RngTableBuilder } from "@/rng/rng_table";
+import { RngTableBuilder } from "@/generate/rng/rng_table";
 import { withTimings } from "@/util/timing";
 
 export const generate = withTimings(

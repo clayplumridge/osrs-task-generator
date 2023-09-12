@@ -1,4 +1,4 @@
-import { RngTableBuilder } from "@/rng/rng_table";
+import { RngTableBuilder } from "@/generate/rng/rng_table";
 import { useRandomResults } from "@/testutil/rng";
 import { useTestState } from "@/testutil/state";
 

@@ -1,8 +1,10 @@
+import { isTaskTypeAllowed } from "./util";
 import { CompleteQuestTask, Constraints, TaskType } from "@/contracts/task";
 import { RequestContext } from "@/generate/context";
+import { satisfiesWildernessConstraint } from "@/generate/data/constraints";
 import { QuestId } from "@/generate/data/quests";
 import { areRequirementsFulfilled } from "@/generate/data/requirements";
-import { RngTableBuilder } from "@/rng/rng_table";
+import { RngTableBuilder } from "@/generate/rng/rng_table";
 
 type QuestWeightRecord = { [key in QuestId]: number };
 
@@ -20,9 +22,14 @@ const QuestWeights: QuestWeightRecord = {
 export function makeTable(context: RequestContext, constraints?: Constraints) {
     let tableBuilder = RngTableBuilder.create<CompleteQuestTask>();
 
+    if (!isTaskTypeAllowed(TaskType.CompleteQuest, constraints)) {
+        return tableBuilder.build();
+    }
+
     const validQuests = Object.values(context.data.quests).filter(
         questDetails =>
-            areRequirementsFulfilled(context, questDetails.requirements)
+            areRequirementsFulfilled(context, questDetails.requirements) &&
+            satisfiesWildernessConstraint(constraints?.wilderness, questDetails)
     );
 
     validQuests.forEach(quest => {

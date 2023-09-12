@@ -43,7 +43,9 @@ export interface BossKillCountTask extends BaseTask<TaskType.BossKillCount> {
 }
 
 export interface BossUntilUniqueTask
-    extends BaseTask<TaskType.BossUntilUnique> {}
+    extends BaseTask<TaskType.BossUntilUnique> {
+    boss: BossDetails;
+}
 
 export interface TrainSkillTask extends BaseTask<TaskType.TrainSkill> {}
 
